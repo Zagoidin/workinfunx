@@ -26,14 +26,26 @@ def tabbel(x,y,preset='thin',color=None):
     return z
 def scale1sc(max, act,width=20,f='█',p='░'):
     sec=int((act/max)*width)
-    hol=int(width-sec-1)
-    z = str(f*sec+p*hol)
+    hol=int(width-sec)
+    ph = str(p*hol)
+    fs = str(f*sec)
+    if hol<=0:
+        ph = ''
+    if sec<=0:
+        fs = ''
+    if len(fs)>width:
+        fs = fs[:width]+'!'
+    z = str(fs+ph)
     return z
-def scale2sc(max, acta, actb,width=20,f='█',p='░'):
+def scale2sc(max, acta, actb,width=20,f='█',p='░',colb='\033[31m',cola='\033[34m'):
     seca=int((acta/max)*width)
     secb=int((actb/max)*width)
     hol=int(width-seca-secb)
-    z = str(f*seca+p*hol+'\033[31m'+f*secb+'\033[0m')
+    z = str(cola+f*seca+'\033[0m'+p*hol+colb+f*secb+'\033[0m')
+    if (seca+secb)>width:
+        z = 'Inappropriate'.ljust(width,'.')[:width]
+        z = '\033[7;38;2;255;0;0m'+z+'\033[0m'
+    return z
 def Titulate():
     while True:
         request = str('Title '+title)
