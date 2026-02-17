@@ -3,8 +3,20 @@ def prixy(x, y, cont): #РАБОТАЕТ, РАБОТАЕТ СУКА!!!!!!!
     ys = str(y)
     z = str('\033['+ys+';'+xs+'H')
     print(z+cont)
-def tabbel(x,y,blt='┌',brt='┐',blb='└',brb='┘',bx='─',by='│'): #ТОЖЕ РАБОТАЕТ!!!!
-    z = str(blt+bx*x+brt+'\n'+(by+' '*x+by+'\n')*y+blb+bx*x+brb)
+def tabbel(x,y,preset='thin'):
+    if preset == 'thin':
+        chorder = ['┌','┐','└','┘','─','│']
+    elif preset == 'bold':
+        chorder = ['┏','┓','┗','┛','━','┃']
+    elif preset == 'double':
+        chorder = ['╔','╗','╚','╝','═','║']
+    elif preset == 'triple':
+        chorder = ['┌','┐','└','┘','┄','┆']
+    elif preset == 'quadriple':
+        chorder = ['┌','┐','└','┘','┈','┊']
+    else:
+        chorder = ['┌','┐','└','┘','─','│']
+    z = str(chorder[0]+chorder[4]*x+chorder[1]+'\n'+(chorder[5]+' '*x+chorder[5]+'\n')*y+chorder[2]+chorder[4]*x+chorder[3])
     return z
 def scale1sc(max, act,width=20,f='█',p='░'):
     sec=int((act/max)*width)
