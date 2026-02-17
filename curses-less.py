@@ -2,8 +2,9 @@ def prixy(x, y, cont): #РАБОТАЕТ, РАБОТАЕТ СУКА!!!!!!!
     xs = str(x)
     ys = str(y)
     z = str('\033['+ys+';'+xs+'H')
-    print(z+cont)
-def tabbel(x,y,preset='thin'):
+    e = str('\033[1B\033['+str(len(cont))+'D')
+    print(z+cont, end=e)
+def tabbel(x,y,preset='thin',color=None):
     if preset == 'thin':
         chorder = ['┌','┐','└','┘','─','│']
     elif preset == 'bold':
@@ -16,7 +17,12 @@ def tabbel(x,y,preset='thin'):
         chorder = ['┌','┐','└','┘','┈','┊']
     else:
         chorder = ['┌','┐','└','┘','─','│']
-    z = str(chorder[0]+chorder[4]*x+chorder[1]+'\n'+(chorder[5]+' '*x+chorder[5]+'\n')*y+chorder[2]+chorder[4]*x+chorder[3])
+    
+    n = str('\x1b[1B\x1b['+str(x+2)+'D')
+    z = str(chorder[0]+chorder[4]*x+chorder[1]+n+(chorder[5]+' '*x+chorder[5]+n)*y+chorder[2]+chorder[4]*x+chorder[3])
+    if color!=None:
+        z = str(color+z+'\033[0m')
+    return z
     return z
 def scale1sc(max, act,width=20,f='█',p='░'):
     sec=int((act/max)*width)
@@ -28,3 +34,31 @@ def scale2sc(max, acta, actb,width=20,f='█',p='░'):
     secb=int((actb/max)*width)
     hol=int(width-seca-secb)
     z = str(f*seca+p*hol+'\033[31m'+f*secb+'\033[0m')
+def Titulate():
+    while True:
+        request = str('Title '+title)
+        os.system(request)
+        if STOPTIT:
+            break
+        time.sleep(1)
+def cls(): #Отлажено на UNIX & WINDOWS (успешно)
+    a = os.name
+    if (a == 'posix'):
+        cls = 'clear'
+    if (a == 'nt'):
+        cls = 'cls'
+    os.system(cls)
+def setterminalsize(x, y):
+    a = os.name
+    if a == 'posix':
+        sx=str(x)
+        sy=str(y)
+        request = str('stty cols '+sx+' rows '+sy)
+    if a == 'nt':
+        sx=str(x)
+        sy=str(y)
+        request = str('mode con: cols='+sx+' lines='+sy)
+    os.system(request)
+## ЗАПУСК ФУНКЦИИ
+# titulation = threading.Thread(target=Titulate)
+# titulation.start()
