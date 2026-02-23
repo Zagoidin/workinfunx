@@ -1,9 +1,10 @@
-def prixy(x, y, cont): #РАБОТАЕТ, РАБОТАЕТ СУКА!!!!!!!
-    xs = str(x)
-    ys = str(y)
-    z = str('\033['+ys+';'+xs+'H')
-    e = str('\033[1B\033['+str(len(cont))+'D')
-    print(z+cont, end=e)
+def prixy(x, y, *cont, end=None, sep=' '):
+    cont = map(str,cont)
+    cont = sep.join(cont)
+    z = f'\033[{y};{x}H'
+    if end==None:
+        end = f'\033[1B\033[{len(cont)}D'
+    print(z+cont, end=end)
 def tabbel(x,y,preset='thin',color=None):
     if preset == 'thin':
         chorder = ['┌','┐','└','┘','─','│']
@@ -17,13 +18,12 @@ def tabbel(x,y,preset='thin',color=None):
         chorder = ['┌','┐','└','┘','┈','┊']
     else:
         chorder = ['┌','┐','└','┘','─','│']
-    
     n = str('\x1b[1B\x1b['+str(x+2)+'D')
     z = str(chorder[0]+chorder[4]*x+chorder[1]+n+(chorder[5]+' '*x+chorder[5]+n)*y+chorder[2]+chorder[4]*x+chorder[3])
     if color!=None:
         z = str(color+z+'\033[0m')
     return z
-    return z
+    
 def scale1sc(max, act,width=20,f='█',p='░'):
     sec=int((act/max)*width)
     hol=int(width-sec)
@@ -34,43 +34,50 @@ def scale1sc(max, act,width=20,f='█',p='░'):
     if sec<=0:
         fs = ''
     if len(fs)>width:
-        fs = fs[:width]+'!'
+        fs = fs[:width]
     z = str(fs+ph)
     return z
-def scale2sc(max, acta, actb,width=20,f='█',p='░',colb='\033[31m',cola='\033[34m'):
-    seca=int((acta/max)*width)
-    secb=int((actb/max)*width)
-    hol=int(width-seca-secb)
-    z = str(cola+f*seca+'\033[0m'+p*hol+colb+f*secb+'\033[0m')
-    if (seca+secb)>width:
-        z = 'Inappropriate'.ljust(width,'.')[:width]
-        z = '\033[7;38;2;255;0;0m'+z+'\033[0m'
-    return z
-def Titulate():
-    while True:
-        request = str('Title '+title)
-        os.system(request)
-        if STOPTIT:
-            break
-        time.sleep(1)
-def cls(): #Отлажено на UNIX & WINDOWS (успешно)
+##
+def cls(): 
+    import os
     a = os.name
     if (a == 'posix'):
         cls = 'clear'
     if (a == 'nt'):
         cls = 'cls'
     os.system(cls)
+##
 def setterminalsize(x, y):
+    import os
     a = os.name
+    if x < 15:
+        x = 15
     if a == 'posix':
-        sx=str(x)
-        sy=str(y)
-        request = str('stty cols '+sx+' rows '+sy)
+        request = f'stty cols {x} rows {y}'
     if a == 'nt':
-        sx=str(x)
-        sy=str(y)
-        request = str('mode con: cols='+sx+' lines='+sy)
+        request = f'mode con: cols={x} lines={y}'
+    prixy(1,1,request)
     os.system(request)
-## ЗАПУСК ФУНКЦИИ
+##
+def fgcol(*parg):
+    if len(parg) >=3:
+        z = f'\033[38;2;{parg[0]};{parg[1]};{parg[2]}m'
+        return z
+    else:
+        z = f'\033[38;5;{parg[0]}m'
+        return z
+##
+def bgcol(*parg):
+    if len(parg) >=3:
+        z = f'\033[48;2;{parg[0]};{parg[1]};{parg[2]}m'
+        return z
+    else:
+        z = f'\033[48;5;{parg[0]}m'
+        return z
+##
+def psnd(nm, format='wav', dir='audio'):
+    from playsound import playsound
+    playsound(f'{dir}/{nm}.{format}', block=False)
+##ЗАПУСК ФУНКЦИИ
 # titulation = threading.Thread(target=Titulate)
 # titulation.start()
