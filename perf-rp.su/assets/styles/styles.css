@@ -1,0 +1,47 @@
+@import 'fonts.css';
+
+
+body {
+	background-color: #121212;
+}
+header {
+	width: 600px;
+	height: 105px;
+	margin: auto;
+	background: radial-gradient( rgba(10, 62, 94, 0.7), transparent, transparent );
+	text-align: center;
+}
+header > h1 {
+	margin: auto;
+	background: linear-gradient(to right, #136ea5, #12a696);
+	color: transparent;
+	background-clip: text;
+	font-family: patefon;
+	width: 500px;
+	font-size: 80px;
+	height: 80px;
+}
+header > h2 {
+
+	color: white;
+	margin: auto;
+	font-size: 16px;
+	font-family: mono;
+}
+.subheader-box {
+	margin: auto;
+	display: flex;
+	width: 768px;
+	height: 28px;
+	border: 1px solid rgba(255, 0, 0, 0.1);
+	justify-content: space-around;
+}
+.subheader-box > a {
+	padding-left: 15px;
+	padding-right: 15px;
+	min-width: 40px;
+	border: 1px solid green;
+	height: 24px;
+	font-family: comic;
+	color: green;
+}
