@@ -1,0 +1,39 @@
+/* Файлик со шрифтами для периферии, солнцеворота и */
+ /* других моих сайтов, написанных по единой архитектуре */
+
+@font-face {
+	font-family: facon ;
+	src: url(../fonts/facon.otf) ;
+}
+@font-face {
+	font-family: godaitalic ;
+	src: url(../fonts/AmazGoDaMatBold.ttf) ;
+}
+@font-face{
+	font-family: truetypewr;
+	src: url(../fonts/Truetypewriter.ttf);
+}
+@font-face{
+	font-family: oldsov;
+	src: url(../fonts/Old-Soviet.otf);
+}
+@font-face{
+	font-family: rursus-cm;
+	src: url(../fonts/RursusCompactMono.ttf);
+}
+@font-face{
+	font-family: patefon;
+	src: url(../fonts/patebold.otf);
+}
+@font-face{
+	font-family: serati;
+	src: url(../fonts/Serati.ttf);
+}
+@font-face{
+	font-family: mono;
+	src: url(../fonts/ShareTechMonoRegular.ttf);
+}
+@font-face{
+	font-family: comic;
+	src: url(../fonts/Rainsuit.ttf);
+}
