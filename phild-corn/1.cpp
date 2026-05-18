@@ -1,0 +1,2 @@
+#include <iostream>
+int main() {    double l, z, w;    std::cout << "Len:\t";    std::cin >> l;    std::cout << "Wid:\t";    std::cin >> w;    double ar = w*l; double pr = 2*(w+l);    std::cout << "\t\x1b[2mOutput:\x1b[0m\nArea:\t\t" << ar << "\nPerimeter:\t" << pr;    std::cin >> z;   return 0;  }
